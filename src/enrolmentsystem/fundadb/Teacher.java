@@ -12,6 +12,7 @@ public class Teacher {
 
 	DBConnect database = new DBConnect();
 
+	// TODO: make add, update, and delete teacher procedures. Also, reformat the code since I pasted this from Students.java
 	public void AddTeacher(int id, String name, String address, String course, String gender, String yearLevel) {
 		try {
 

@@ -21,7 +21,7 @@ public class DBConnect {
 		try {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://192.168.0.235:3306/enrolmentsystem?zeroDateTimeBehavior=CONVERT_TO_NULL";
+			String url = "jdbc:mysql://192.168.146.3:3306/enrolmentsystem?zeroDateTimeBehavior=CONVERT_TO_NULL";
 			String user = "root";
 			String password = "Fundadb_123";
 

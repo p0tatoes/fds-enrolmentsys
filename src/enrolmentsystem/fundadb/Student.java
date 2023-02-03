@@ -32,13 +32,17 @@ public class Student {
 		}
 	}
 
+	/**
+	 * TODO: Change into a procedure that deletes entries from students AND enrol
+	 * tables
+	 */
 	public static void DeleteStudent(String studentId) {
 		try {
 			int id = Integer.parseInt(studentId);
 			String query = String.format("DELETE FROM students WHERE id=%d", id);
 			database.statement.executeUpdate(query);
 		} catch (Exception e) {
-			System.err.println("\nERROR:Failed to delete student entry!\n");
+			System.out.println("\nERROR:Failed to delete student entry!\n");
 		}
 	}
 

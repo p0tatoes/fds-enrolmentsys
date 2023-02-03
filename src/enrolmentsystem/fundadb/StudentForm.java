@@ -441,6 +441,7 @@ public class StudentForm extends javax.swing.JFrame {
 		if (option == 0) {
 			Enrol.EnrolCourse(studentId, courseId);
 		}
+		showStudents();
 		showEnroledSubjects();
   }//GEN-LAST:event_btnEnrolActionPerformed
 
@@ -521,7 +522,7 @@ public class StudentForm extends javax.swing.JFrame {
 		 * Delete student on click
 		 */
 		Student.DeleteStudent(studentId);
-		showEnroledSubjects();
+		showStudents();
   }//GEN-LAST:event_btnDeleteActionPerformed
 
   private void btnDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDropActionPerformed
@@ -533,6 +534,7 @@ public class StudentForm extends javax.swing.JFrame {
 			Enrol.DropCourse(studentId, courseId);
 			messageBox("Course had been dropped!", "Drop Successful");
 		}
+		showStudents();
 		showEnroledSubjects();
   }//GEN-LAST:event_btnDropActionPerformed
 

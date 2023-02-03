@@ -349,6 +349,7 @@ public class CourseForm extends javax.swing.JFrame {
 		String schedule = (String) tblCourses.getValueAt(selectedRow, 4);
 		inputSchedule.setText(schedule);
 
+		showCourses();
 		showEnroledStudents();
   }//GEN-LAST:event_tblCoursesMouseClicked
 

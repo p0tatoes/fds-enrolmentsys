@@ -35,6 +35,7 @@ public class Enrol {
 			}
 		} catch (Exception e) {
 			System.out.println("\nERROR: Failed to enrol a course!\n");
+			System.out.println(e);
 		}
 	}
 

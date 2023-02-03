@@ -29,8 +29,14 @@ public class Course {
 			database.statement.executeUpdate(query);
 		} catch (Exception e) {
 			System.out.println("\nERROR: Failed to update course entry!\n");
-			System.out.println(e);
 		}
+	}
+
+	/**
+	 * TODO: change into a procedure that deletes entries from courses AND enrol
+	 * tables
+	 */
+	public static void DeleteCourse(int studentId, int courseId) {
 	}
 
 }
