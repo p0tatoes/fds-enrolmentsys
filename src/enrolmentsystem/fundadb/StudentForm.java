@@ -438,6 +438,14 @@ public class StudentForm extends javax.swing.JFrame {
 		 * Enrol course to student enrolment
 		 */
 		int option = confirmation(String.format("Enrol Course #%s to Student #%s?", courseId, studentId));
+
+		try {
+			String query = String.format("CALL stageEnrolment(%s, %s)", studentId, courseId);
+			database.statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
 		if (option == 0) {
 			Enrol.EnrolCourse(studentId, courseId);
 		}
@@ -498,7 +506,18 @@ public class StudentForm extends javax.swing.JFrame {
 		String gender = inputGender.getText();
 		String yearLevel = inputYear.getText();
 
-		Student.AddStudent(id, name, address, course, gender, yearLevel);
+		int option = confirmation(String.format("Insert student #%d into the database?", id));
+
+		try {
+			String query = String.format("CALL stageStudentInsert(%d, '%s', '%s', '%s', '%s', '%s')", id, name, address, course, gender, yearLevel);
+			database.statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
+		if (option == 0) {
+			Student.AddStudent(id, name, address, course, gender, yearLevel);
+		}
 		showStudents();
   }//GEN-LAST:event_btnAddActionPerformed
 
@@ -513,7 +532,18 @@ public class StudentForm extends javax.swing.JFrame {
 		String gender = inputGender.getText();
 		String yearLevel = inputYear.getText();
 
-		Student.UpdateStudent(id, name, address, course, gender, yearLevel);
+		int option = confirmation(String.format("Update student entry for Student #%d?", id));
+
+		try {
+			String query = String.format("CALL stageStudentUpdate(%d, '%s', '%s', '%s', '%s', '%s')", id, name, address, course, gender, yearLevel);
+			database.statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
+		if (option == 0) {
+			Student.UpdateStudent(id, name, address, course, gender, yearLevel);
+		}
 		showStudents();
   }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -521,7 +551,18 @@ public class StudentForm extends javax.swing.JFrame {
 		/**
 		 * Delete student on click
 		 */
-		Student.DeleteStudent(studentId);
+		int option = confirmation(String.format("Delete student entry for Student #%s?", studentId));
+
+		try {
+			String query = String.format("CALL stageStudentDelete(%s)", studentId);
+			database.statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
+		if (option == 0) {
+			Student.DeleteStudent(studentId);
+		}
 		showStudents();
   }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -530,9 +571,16 @@ public class StudentForm extends javax.swing.JFrame {
 		 * Drop course from student enrolment
 		 */
 		int option = confirmation(String.format("Drop Course #%s for Student #%s?", courseId, studentId));
+
+		try {
+			String query = String.format("CALL stageDropOut(%s, %s)", studentId, courseId);
+			database.statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
 		if (option == 0) {
 			Enrol.DropCourse(studentId, courseId);
-			messageBox("Course had been dropped!", "Drop Successful");
 		}
 		showStudents();
 		showEnroledSubjects();
@@ -543,7 +591,6 @@ public class StudentForm extends javax.swing.JFrame {
   }//GEN-LAST:event_formWindowGainedFocus
 
   private void tblCoursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCoursesMouseClicked
-		// TODO add your handling code here:
 		int selectedRow = tblCourses.getSelectedRow();
 		courseId = (String) tblCourses.getValueAt(selectedRow, 0);
   }//GEN-LAST:event_tblCoursesMouseClicked

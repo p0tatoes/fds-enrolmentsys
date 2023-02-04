@@ -4,6 +4,8 @@
  */
 package enrolmentsystem.fundadb;
 
+import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -76,6 +78,12 @@ public class CourseForm extends javax.swing.JFrame {
 		} catch (Exception e) {
 			System.out.println("\nERROR: Failed to show enrolled subjects\n");
 		}
+	}
+
+	private int confirmation(String message) {
+		// Confirm popup; asks if you would like to confirm dropping or adding a subject
+		int result = JOptionPane.showConfirmDialog((Component) null, message, "alert", JOptionPane.OK_CANCEL_OPTION);
+		return result; // returns 0 if you press "OK"; returns 1 if you press "CANCEL"
 	}
 
 	/**
@@ -363,7 +371,18 @@ public class CourseForm extends javax.swing.JFrame {
 		int units = Integer.parseInt(inputUnits.getText());
 		String schedule = inputSchedule.getText();
 
-		Course.AddCourse(id, code, description, units, schedule);
+		int option = confirmation(String.format("Insert course #%d into the database?", id));
+
+		try {
+			String query = String.format("CALL stageCourseInsert(%d, '%s', '%s', %d, '%s')", id, code, description, units, schedule);
+			database.statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
+		if (option == 0) {
+			Course.AddCourse(id, code, description, units, schedule);
+		}
 		showCourses();
   }//GEN-LAST:event_btnAddActionPerformed
 
@@ -377,7 +396,18 @@ public class CourseForm extends javax.swing.JFrame {
 		int units = Integer.parseInt(inputUnits.getText());
 		String schedule = inputSchedule.getText();
 
-		Course.UpdateCourse(id, code, description, units, schedule);
+		int option = confirmation(String.format("Update entry for course #%d?", id));
+
+		try {
+			String query = String.format("CALL stageCourseUpdate(%d, '%s', '%s', %d, '%s')", id, code, description, units, schedule);
+			database.statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
+		if (option == 0) {
+			Course.UpdateCourse(id, code, description, units, schedule);
+		}
 		showCourses();
   }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -385,6 +415,20 @@ public class CourseForm extends javax.swing.JFrame {
 		/**
 		 * Delete course on click
 		 */
+		int option = confirmation(String.format("Delete entry for Course #%s", courseId));
+
+		try {
+			// TODO: make the procedure lol
+			String query = String.format("CALL stageCourseDelete(%s)", courseId);
+			database.statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
+		if (option == 0) {
+			Course.DeleteCourse(courseId);
+		}
+		showCourses();
   }//GEN-LAST:event_btnDeleteActionPerformed
 
 	/**

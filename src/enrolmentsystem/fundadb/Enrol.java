@@ -16,14 +16,12 @@ public class Enrol {
 	private static DBConnect database = new DBConnect();
 
 	public static void EnrolCourse(String studentId, String courseId) {
-		// TODO: add enrol functionality; add `EnrolCourse` procedure
 		try {
 			int studid = Integer.parseInt(studentId);
 			int cid = Integer.parseInt(courseId);
 			String query = String.format("CALL EnrolCourse(%d, %d, @conflict)", studid, cid);
 			database.statement.executeUpdate(query);
 
-			// TODO: add pop up message when there is conflicting schedule
 			database.result = database.statement.executeQuery("SELECT @conflict");
 			if (database.result.next()) {
 				String conflict = database.result.getString(1);
@@ -35,20 +33,24 @@ public class Enrol {
 			}
 		} catch (Exception e) {
 			System.out.println("\nERROR: Failed to enrol a course!\n");
-			System.out.println(e);
+			JOptionPane.showMessageDialog((Component) null, "Failed to enrol course", "Enrol failed", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
 	public static void DropCourse(String studentId, String courseId) {
-		// TODO: add drop functionality; add `DropCourse` procedure
 		try {
 			int studid = Integer.parseInt(studentId);
 			int cid = Integer.parseInt(courseId);
 			String query = String.format("CALL DropCourse(%d, %d)", studid, cid);
 			database.statement.executeUpdate(query);
 
+			String title = "Drop Successful";
+			String message = String.format("Course #%d has been dropped for student #%d", cid, studid);
+			JOptionPane.showMessageDialog((Component) null, message, title, JOptionPane.INFORMATION_MESSAGE);
 		} catch (Exception e) {
 			System.out.println("\nERROR: Failed to drop a course!\n");
+			System.err.println(e);
+			JOptionPane.showMessageDialog((Component) null, "Failed to drop course", "Drop Failed", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
