@@ -491,6 +491,7 @@ public class StudentForm extends javax.swing.JFrame {
 		String yearLevel = (String) tblStudents.getValueAt(selectedRow, 5);
 		inputYear.setText(yearLevel);
 
+		showStudents();
 		showEnroledSubjects();
 
   }//GEN-LAST:event_tblStudentsMouseClicked

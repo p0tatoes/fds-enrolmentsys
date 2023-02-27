@@ -27,6 +27,7 @@ public class Student {
 
 		} catch (Exception e) {
 			System.out.println("\nERROR: Failed to add student!\n");
+			System.out.println(e);
 			JOptionPane.showMessageDialog((Component) null, "Student was not inserted to the database", "Insert failed", JOptionPane.ERROR_MESSAGE);
 		}
 	}
@@ -45,10 +46,6 @@ public class Student {
 		}
 	}
 
-	/**
-	 * TODO: Change into a procedure that deletes entries from students AND enrol
-	 * tables
-	 */
 	public static void DeleteStudent(String studentId) {
 		try {
 			int id = Integer.parseInt(studentId);

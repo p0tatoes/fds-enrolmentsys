@@ -24,6 +24,7 @@ public class Teacher {
 		}
 	}
 
+	// TODO: make add, update, and delete teacher procedures. Also, reformat the code since I pasted this from Students.java
 	public void UpdateTeacher(int id, String name, String address, String course, String gender, String yearLevel) {
 		try {
 			String query = String.format("CALL updateStudent(%d, '%s', '%s', '%s', '%s', '%s')", id, name, address, course, gender, yearLevel);

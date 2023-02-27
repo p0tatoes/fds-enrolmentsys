@@ -44,10 +44,6 @@ public class Course {
 		}
 	}
 
-	/**
-	 * TODO: change into a procedure that deletes entries from courses AND enrol
-	 * tables
-	 */
 	public static void DeleteCourse(String courseId) {
 		try {
 			int id = Integer.parseInt(courseId);

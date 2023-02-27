@@ -418,7 +418,6 @@ public class CourseForm extends javax.swing.JFrame {
 		int option = confirmation(String.format("Delete entry for Course #%s", courseId));
 
 		try {
-			// TODO: make the procedure lol
 			String query = String.format("CALL stageCourseDelete(%s)", courseId);
 			database.statement.executeUpdate(query);
 		} catch (Exception e) {

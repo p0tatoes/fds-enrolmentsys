@@ -29,7 +29,6 @@ public class DBConnect {
 			statement = connection.createStatement();
 
 		} catch (Exception e) {
-
 			System.out.println("\nError connecting to database!\n");
 
 		}

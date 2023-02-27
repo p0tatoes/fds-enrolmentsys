@@ -14,7 +14,6 @@ public class EnrolmentSystemFundaDB {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		// TODO code application logic here
 		StudentForm studentForm = new StudentForm();
 		studentForm.setVisible(true);
 	}
